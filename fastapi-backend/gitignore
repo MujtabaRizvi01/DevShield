@@ -1,0 +1,50 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# .gitignore for DevShield fastapi-backend
+#
+# FIX FOR: Critical Issue #5 — Database credentials in plain text .env file.
+#
+# The .env file contains MONGODB_URI (with password) and GROQ_API_KEY.
+# If committed to Git these become permanently exposed in the repository
+# history even if later deleted.  This .gitignore prevents that.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── SECRETS — never commit these ─────────────────────────────────────────────
+.env
+.env.local
+.env.production
+.env.staging
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+
+# ── Auto-generated at runtime ─────────────────────────────────────────────────
+storage/
+analysis_results/
+temp_projects/
+Dast_analysis_result/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual environments ──────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+Claude/
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

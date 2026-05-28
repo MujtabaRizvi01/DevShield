@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+groq
+motor          # async MongoDB driver (Motor wraps PyMongo with asyncio support)
+pymongo        # Motor dependency — also needed for bson.ObjectId
+pydantic
+cryptography

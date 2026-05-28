@@ -1,0 +1,162 @@
+{
+  "name": "DevShield",
+  "displayName": "DevShield",
+  "description": "AI-powered security analysis for VS Code",
+  "version": "4.0.1",
+  "publisher": "Mujtaba Rizvi",
+  "engines": {
+    "vscode": "^1.82.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "devshield",
+          "title": "DevShield",
+          "icon": "media/Logo.png"
+        }
+      ]
+    },
+    "views": {
+      "devshield": [
+        {
+          "id": "devshieldSecurity",
+          "name": "Security Panel"
+        },
+        {
+          "id": "devshieldDast",
+          "name": "DAST Scanner"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "devshield.runDast",
+        "title": "Run DAST Scan",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "devshield.openDastReport",
+        "title": "Open DAST Report"
+      },
+      {
+        "command": "devshield.retryDastScan",
+        "title": "Retry DAST Scan"
+      },
+      {
+        "command": "devshield.deleteDastScan",
+        "title": "Delete DAST Scan",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "devshield.createIgnoreFile",
+        "title": "Create .devshieldignore",
+        "icon": "$(file-add)"
+      },
+      {
+        "command": "devshield.removeFileFromPanel",
+        "title": "Remove from Panel",
+        "icon": "$(close)"
+      },
+      {
+        "command": "devshield.debugSast",
+        "title": "DevShield: Debug SAST Status"
+      },
+      {
+        "command": "devshield.rotateKey",
+        "title": "DevShield: Rotate API Key"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "devshield.runDast",
+          "when": "view == devshieldDast",
+          "group": "navigation@1"
+        },
+        {
+          "command": "devshield.createIgnoreFile",
+          "when": "view == devshieldSecurity",
+          "group": "navigation@1"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "devshield.removeFileFromPanel",
+          "when": "viewItem == fileNode",
+          "group": "inline"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "devshield.runDast"
+        },
+        {
+          "command": "devshield.createIgnoreFile"
+        },
+        {
+          "command": "devshield.removeFileFromPanel",
+          "when": "false"
+        },
+        {
+          "command": "devshield.openDastReport",
+          "when": "false"
+        },
+        {
+          "command": "devshield.retryDastScan",
+          "when": "false"
+        },
+        {
+          "command": "devshield.deleteDastScan",
+          "when": "false"
+        },
+        {
+          "command": "devshield.debugSast"
+        },
+        {
+          "command": "devshield.rotateKey"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "devshieldDast",
+        "contents": "No scan has been run yet.\n[$(shield) Run DAST Scan](command:devshield.runDast)\nEnter your app URL and DevShield will scan it for vulnerabilities."
+      }
+    ],
+    "configuration": {
+      "title": "DevShield",
+      "properties": {
+        "devshield.backendUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8001",
+          "description": "URL of the DevShield FastAPI backend"
+        },
+        "devshield.analysisResultsPath": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to analysis_results folder (leave empty for auto-detect)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.82.0",
+    "typescript": "^5.3.0",
+    "vscode": "^1.1.37"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}
